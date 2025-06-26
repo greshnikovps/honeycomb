@@ -14,7 +14,6 @@ struct ProgramOptions {
     bool doVisualize = true;
     bool flatTop = true;
     std::string outputFile = "honeycomb.obj";
-    bool useMatrix = true;
 };
 
 void printHelp(const char* progName) {
@@ -24,7 +23,6 @@ void printHelp(const char* progName) {
               << "  -s, --side <double>     side length (default 1.0)\n"
               << "  --pointy                use pointy-top orientation (default flat-top)\n"
               << "  --no-visualize          disable VTK visualization\n"
-              << "  --matrix                use matrix-based grid algorithm\n"
               << "  -o, --output <file>     output OBJ file (default honeycomb.obj)\n";
 }
 
@@ -41,8 +39,6 @@ bool parseArguments(int argc, char* argv[], ProgramOptions& opts) {
             opts.flatTop = false;
         } else if (arg == "--no-visualize") {
             opts.doVisualize = false;
-        } else if (arg == "--matrix") {
-            opts.useMatrix = true;
         } else if ((arg == "-o" || arg == "--output") && i + 1 < argc) {
             opts.outputFile = argv[++i];
         } else if (arg == "-?" || arg == "--help") {
