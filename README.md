@@ -1,48 +1,49 @@
 # HoneycombFrame
 
-This project generates a 20×20 hexagonal grid frame (vertices and edges) with side length 1,
-eliminating duplicate vertices/edges, and exports the geometry in OBJ format. Optionally,
-visualizes the frame using VTK. Structured as a CMake project with dependencies managed via vcpkg manifest.
+A generator for hexagonal (honeycomb) grids with OBJ export and optional VTK visualization.
 
 ## Features
-- Generate hex grid using axial coordinates
-- Deduplicate vertices and edges
-- Export to Wavefront OBJ
-- Optional visualization via VTK
-- Modern C++17, clean architecture
-
-## Directory Structure
-```
-HoneycombFrame/
-├── CMakeLists.txt
-├── vcpkg.json
-├── include/
-│   ├── HexGrid.hpp
-│   ├── Vertex.hpp
-│   ├── Edge.hpp
-│   ├── ExporterOBJ.hpp
-│   └── VisualizerVTK.hpp
-├── src/
-│   ├── HexGrid.cpp
-│   ├── ExporterOBJ.cpp
-│   ├── VisualizerVTK.cpp
-│   └── main.cpp
-└── tests/ (optional)
-    └── HexGridTest.cpp
-```
+- Generates a regular hexagonal grid (honeycomb) with configurable size and edge length
+- Exports the grid to OBJ format
+- Optional visualization using VTK
+- Two grid generation algorithms: classic (HexGrid) and matrix-based (HexGridMatrix)
 
 ## Build Instructions
-1. Install vcpkg and integrate with CMake (manifest mode).
-2. From project root:
-   ```sh
-   mkdir build && cd build
-   cmake ..
-   cmake --build .
-   ```
-3. Run the application:
-   ```sh
-   ./HoneycombFrame
-   ```
+
+```sh
+cmake -S . -B build -DUSE_VTK=ON   # enable VTK visualization
+cmake --build build
+```
+
+- To disable visualization: `-DUSE_VTK=OFF`
+- To build only the generator: `-DUSE_VTK=OFF`
 
 ## Usage
-By default, generates a 20×20 grid and exports to `honeycomb.obj`. Use CLI options to adjust size or enable VTK visualization.
+
+```sh
+./HoneycombFrame [options]
+```
+
+### Command-line options
+- `-w, --width <int>`       — grid width (number of hexagons horizontally)
+- `-h, --height <int>`      — grid height (number of hexagons vertically)
+- `-s, --side <double>`     — hexagon edge length
+- `--no-visualize`          — disable visualization
+- `--matrix`                — use the matrix-based algorithm (HexGridMatrix)
+- `-o, --output <file>`     — output OBJ file name
+
+## Code Structure
+- `src/HexGridMatrix.cpp`, `include/HexGridMatrix.h` — matrix-based honeycomb grid generation
+- `src/main.cpp` — entry point, argument parsing, export, visualization
+- `src/ExporterOBJ.cpp` — OBJ export
+- `src/VisualizerVTK.cpp` — VTK visualization (if enabled)
+- `Vertex.h`, `Edge.h` — vertex and edge structures
+
+## Example
+
+```sh
+./HoneycombFrame --width 10 --height 10 --side 1.0 --matrix --no-visualize -o honeycomb.obj
+```
+
+## License
+MIT
