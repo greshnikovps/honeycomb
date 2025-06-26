@@ -22,7 +22,6 @@ public:
         int width;    ///< Number of hexagons horizontally
         int height;   ///< Number of hexagons vertically
         double side;  ///< Hexagon edge length
-        bool flatTop; ///< Orientation (flatTop=true means horizontal rows)
     };
 
     /**

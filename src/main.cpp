@@ -12,7 +12,6 @@ struct ProgramOptions {
     int height = 20;
     double side = 1.0;
     bool doVisualize = true;
-    bool flatTop = true;
     std::string outputFile = "honeycomb.obj";
 };
 
@@ -35,8 +34,6 @@ bool parseArguments(int argc, char* argv[], ProgramOptions& opts) {
             opts.height = std::stoi(argv[++i]);
         } else if ((arg == "-s" || arg == "--side") && i + 1 < argc) {
             opts.side = std::stod(argv[++i]);
-        } else if (arg == "--pointy") {
-            opts.flatTop = false;
         } else if (arg == "--no-visualize") {
             opts.doVisualize = false;
         } else if ((arg == "-o" || arg == "--output") && i + 1 < argc) {
@@ -54,7 +51,7 @@ bool parseArguments(int argc, char* argv[], ProgramOptions& opts) {
 }
 
 HexGridMatrix createMatrixGrid(const ProgramOptions& opts) {
-    HexGridMatrix::Config cfg{opts.width, opts.height, opts.side, opts.flatTop};
+    HexGridMatrix::Config cfg{opts.width, opts.height, opts.side};
     HexGridMatrix grid(cfg);
     grid.generate();
     return grid;
