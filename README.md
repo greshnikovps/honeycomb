@@ -11,12 +11,11 @@ A generator for hexagonal (honeycomb) grids with OBJ export and optional VTK vis
 ## Build Instructions
 
 ```sh
-cmake -S . -B build -DUSE_VTK=ON   # enable VTK visualization
+cmake -S . -B build 
 cmake --build build
 ```
 
 - To disable visualization: `-DUSE_VTK=OFF`
-- To build only the generator: `-DUSE_VTK=OFF`
 
 ## Usage
 
@@ -42,8 +41,5 @@ cmake --build build
 ## Example
 
 ```sh
-./HoneycombFrame --width 10 --height 10 --side 1.0 --matrix --no-visualize -o honeycomb.obj
+./HoneycombFrame --width 10 --height 10 --side 1.0 --no-visualize -o honeycomb.obj
 ```
-
-## License
-MIT
