@@ -1,5 +1,15 @@
 # HoneycombFrame
 
+Straumann Group test task.
+
+The task:
+Create a C++ app to build a honeycomb frame.
+Requirements
+ 20x20 cells, edge size is 1
+ Vertices and edges only (the frame lies on a plane)
+ Ensure there are no duplicates or unnecessary vertices or edges
+ CMake C++ project
+
 A generator for hexagonal (honeycomb) grids with OBJ export and optional VTK visualization.
 
 ## Features
